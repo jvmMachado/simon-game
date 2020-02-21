@@ -4,7 +4,7 @@ body {
 }
 
 
-#level-title, footer {
+#level-title, footer, button {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
   margin:  5%;
@@ -55,4 +55,35 @@ footer {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+.hide {
+  visibility: hidden;
+  display: none;
+}
+
+.spanhide {
+  visibility: hidden;
+  display: none;
+}
+
+button {
+  background-color: red;
+  border-radius: 25px;
+  border: 5px solid black;
+  padding: 15px;
+  text-align: center;
+  align-content: center;
+  margin: 3.5%;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2rem;
+  margin:  3%;
+  color: #FEF2BF;
 }

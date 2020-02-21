@@ -5,38 +5,43 @@ let userClickedPattern = [];
 let started = false;
 let level = 0;
 let numberOfClicks = 0;
-
-$(document).on('keypress', function() {
+$('h1').toggleClass('hide');
+$('.start').on('click', function() {
   if (started === false) {
     nextSequence();
     started = true;
+    $('.start').toggleClass('hide');
+    $('h1').toggleClass('hide');
+    $('h2').html('');
   } else {
   }
 });
 
 $('.btn').on('click', function() {
-  const userChosenColour = $(this).attr('id');
+  if (started) {
+    const userChosenColour = $(this).attr('id');
 
-  userClickedPattern.push(userChosenColour);
+    userClickedPattern.push(userChosenColour);
 
-  playSound(this);
+    playSound(this);
 
-  animatePress(this);
+    animatePress(this);
 
-  if (
-    userClickedPattern[userClickedPattern.length - 1] !==
-    gamePattern[numberOfClicks]
-  ) {
-    error();
-    return;
-  }
-  numberOfClicks++;
+    if (
+      userClickedPattern[userClickedPattern.length - 1] !==
+      gamePattern[numberOfClicks]
+    ) {
+      error();
+      return;
+    }
+    numberOfClicks++;
 
-  if (numberOfClicks === gamePattern.length) {
-    checkSequence();
-    setTimeout(nextSequence, 1000);
-    numberOfClicks = 0;
-  }
+    if (numberOfClicks === gamePattern.length) {
+      checkSequence();
+      setTimeout(nextSequence, 1000);
+      numberOfClicks = 0;
+    }
+}
 });
 
 function playSound(btn) {
@@ -91,11 +96,16 @@ function error() {
     $('body').toggleClass('game-over');
   }, 200);
 
-  $('h1').html('Errou! <br> Pressione qualquer tecla para reiniciar');
+  $('h1').html('Errou!');
 
   const wrongAudio = new Audio();
   wrongAudio.src = '/sounds/wrong.mp3';
   wrongAudio.play();
+  
+  $('.start').toggleClass('hide');
+  $('.re').removeClass('spanhide');
+  $('h1').toggleClass('hide');
+  $('h2').html(`Você foi até o level ${level}`);
 
   startOver();
 }
